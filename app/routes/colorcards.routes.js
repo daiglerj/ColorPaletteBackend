@@ -10,7 +10,7 @@ module.exports = (app)=>{
 	app.get('/getColors/:paletteId',colorPalette.getColor)
 	
 	//Remove a color from the color palette
-	app.put('/deleteColor/:paletteId',colorPalette.removeColor)
+	app.put('/deleteColor/:paletteName',colorPalette.removeColor)
 
 	//Get all colors in an existing color palette by the palette name
 	app.get('/getColorsByName/:paletteName',colorPalette.getPaletteByName)

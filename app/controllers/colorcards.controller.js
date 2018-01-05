@@ -52,14 +52,22 @@ exports.getColor = (req,res)=>{
 }
 
 exports.removeColor = (req,res)=>{
-	ColorPalette.findById(req.params.paletteId,(err,palette)=>{
+	let query = {paletteName: req.params.paletteName}
+	ColorPalette.find(query,(err,palette)=>{
 		if(err){
 			console.log("error deleting the color")
 		}
 		else{
-			var index = palette.colors.indexOf(req.body.color)
-			palette.colors.splice(index,1)
-			res.send(palette.colors)
+			var index = palette[0].colors.indexOf(req.body.color)
+			palette[0].colors.splice(index,1)
+			palette[0].save((err,data)=>{
+				if(err){
+					console.log("Error deleting color")
+				}
+				else{
+					res.send(data)
+				}
+			})
 		}
 	})
 }
